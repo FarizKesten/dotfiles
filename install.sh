@@ -8,7 +8,7 @@ if ! command -v chezmoi >/dev/null 2>&1; then
 fi
 
 # Initialize chezmoi with your dotfiles
-chezmoi init --apply https://github.com/YOUR_USERNAME/dotfiles.git
+chezmoi init --apply https://github.com/FarizKesten/dotfiles.git
 
 echo "🎉 Setup complete!"
 
