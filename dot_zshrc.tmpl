@@ -1,0 +1,18 @@
+# DevBox global integration
+if command -v devbox >/dev/null 2>&1; then
+    eval "$(devbox global shellenv --init-hook)"
+    eval "$(devbox completion zsh)"
+fi
+
+# Enhanced fzf integration
+if command -v fzf >/dev/null 2>&1; then
+    export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+    source <(fzf --zsh)
+fi
+
+# Aliases
+alias vim='nvim'
+alias search='rg'
+alias find='fd'
+alias files='fzf'
+
