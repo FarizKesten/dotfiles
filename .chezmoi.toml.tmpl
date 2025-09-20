@@ -1,15 +1,18 @@
-{{- $name := promptStringOnce . "name" "Full name" -}}
-{{- $email := promptStringOnce . "email" "Email address" -}}
-{{- $work := promptBoolOnce . "work" "Is this a work computer? (y/n)" -}}
+# .chezmoi.toml.tmpl - Fixed version
+{{- $name := promptString "Full name" -}}
+{{- $email := promptString "Email address" -}}
+{{- $work := promptBool "Is this a work computer" -}}
+{{- $personal := promptBool "Is this a personal computer" -}}
 
 [data]
     name = {{ $name | quote }}
     email = {{ $email | quote }}
     work = {{ $work }}
+    personal = {{ $personal }}
 
 [edit]
     command = "nvim"
+
 [git]
     autoCommit = true
     autoPush = true
-
