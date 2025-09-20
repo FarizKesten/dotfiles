@@ -1,0 +1,19 @@
+#!/bin/bash
+# run_once_01_install_global_tools.sh.tmpl
+
+set -e
+
+echo "🔧 Setting up global development tools..."
+
+# Ensure devbox is in PATH
+export PATH="$HOME/.local/bin:$PATH"
+
+# Install global tools
+echo "Adding global development tools..."
+devbox global add ripgrep nodejs fzf fd neovim git lazygit tmux curl jq
+
+# Verify installation
+echo "Verifying tools installation..."
+devbox global list
+
+echo "Global tools installation complete! ✅"

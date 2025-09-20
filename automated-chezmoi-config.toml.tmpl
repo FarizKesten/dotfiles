@@ -1,0 +1,21 @@
+# chezmoi.toml.tmpl - Main configuration with prompts
+{{- $name := promptStringOnce . "name" "Full name" -}}
+{{- $email := promptStringOnce . "email" "Email address" -}}
+{{- $work := promptBoolOnce . "work" "Is this a work computer? (y/n)" -}}
+{{- $personal := promptBoolOnce . "personal" "Is this a personal computer? (y/n)" -}}
+
+[data]
+    name = {{ $name | quote }}
+    email = {{ $email | quote }}
+    work = {{ $work }}
+    personal = {{ $personal }}
+
+[edit]
+    command = "nvim"
+
+[git]
+    autoCommit = true
+    autoPush = true
+
+[diff]
+    exclude = ["scripts"]
