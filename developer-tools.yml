@@ -3,6 +3,7 @@
   connection: local
   gather_facts: yes
   vars:
+    ansible_python_interpreter : "{{ansible_playbook_python}}"
     common_tools:
       - ripgrep
       - fzf
@@ -14,10 +15,14 @@
       - jq
       - zsh
       - tree-sitter-cli
+      - w3m
+      - lynx
+      - links
+
     ubuntu_tools:
       - nodejs
       - fd-find
-      - tree-sitter-cli
+
     mac_tools:
       - node
       - fd
@@ -35,5 +40,24 @@
     - name: Install developer tools on Mac
       homebrew:
         name: "{{ common_tools + mac_tools }}"
+        state: present
+      when: ansible_facts['os_family'] == "Darwin"
+
+    - name: Install Bitwarden CLI on Ubuntu/Linux
+      become: yes
+      apt:
+        name: npm
+        state: present
+      when: ansible_facts['os_family'] == "Debian"
+
+    - name: Install Bitwarden CLI via npm on Linux
+      npm:
+        name: "@bitwarden/cli"
+        global: yes
+      when: ansible_facts['os_family'] == "Debian"
+
+    - name: Install Bitwarden CLI on macOS
+      homebrew:
+        name: bitwarden-cli
         state: present
       when: ansible_facts['os_family'] == "Darwin"
