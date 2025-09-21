@@ -11,6 +11,7 @@
       - tmux
       - curl
       - jq
+      - zsh
       # Add more shared tool names here
 
     ubuntu_tools:
