@@ -10,8 +10,7 @@ echo "🔧 Setting up global development tools..."
 devbox global add ripgrep fzf git tmux curl wget jq zsh fd neovim nodejs lazygit tree-sitter
 
 # Add shell integration
-echo 'eval "$(devbox global shellenv --init-hook)"' >> ~/.zshrc
-source ~/.zshrc
+eval "$(devbox global shellenv --init-hook)"
 
 # Install npm tools
 npm install -g @bitwarden/cli tree-sitter-cli
