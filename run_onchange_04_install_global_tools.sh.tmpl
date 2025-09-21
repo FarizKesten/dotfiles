@@ -12,7 +12,7 @@ devbox global add ripgrep fzf git tmux curl wget jq zsh fd neovim nodejs lazygit
 # Add shell integration
 echo eval "$(devbox global shellenv)" >> ~/.zshrc && source ~/.zshrc
 refresh-global
-
+nix profile add nixpkgs#eza
 # Install npm tools
 npm install -g @bitwarden/cli tree-sitter-cli
 
