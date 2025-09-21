@@ -13,6 +13,7 @@
       - curl
       - jq
       - zsh
+      - tree-sitter
     ubuntu_tools:
       - nodejs
       - fd-find
