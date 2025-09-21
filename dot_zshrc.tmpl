@@ -126,7 +126,9 @@ alias ls='eza'  # Will be installed via Ansible
 {{- end }}
 
 # Tmux
-alias dev='~/.config/tmux/dev-setup.sh'
+export PATH="$HOME/.tmuxifier/bin:$PATH"
+eval "$(tmuxifier init -)"
+alias dev='tmuxifier load-session dev'
 
 # Modern replacements
 alias find='fd'
