@@ -17,6 +17,11 @@ if ! command -v chezmoi >/dev/null 2>&1; then
   sh -c "$(curl -fsLS chezmoi.io/get)"
 fi
 
+#Install devbox if not present
+if ! command -v devbox >/dev/null 2>&1; then
+  curl -fsSL https://get.jetify.com/devbox | bash
+fi
+
 # Install Ansible if missing
 if ! command -v ansible &>/dev/null; then
   echo "Installing Ansible..."
