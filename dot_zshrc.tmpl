@@ -155,16 +155,12 @@ setopt HIST_IGNORE_SPACE
 # === Load Powerlevel10k config ===
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-{{- if .personal }}
 # Personal machine specific settings
 export EDITOR='nvim'
 export BROWSER='open'
-{{- end }}
 
-{{- if .work }}
 # Work machine specific settings
 # Add any work-specific configurations here
-{{- end }}
 
 # Switch to fish shell if available (your preference)
 {{- if eq .chezmoi.os "darwin" }}

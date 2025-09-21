@@ -1,6 +1,7 @@
 ---
 - hosts: localhost
-  become: yes
+  connection: local
+  gather_facts: yes
   vars:
     common_tools:
       - ripgrep
@@ -12,18 +13,16 @@
       - curl
       - jq
       - zsh
-      # Add more shared tool names here
-
     ubuntu_tools:
       - nodejs
       - fd-find
-
     mac_tools:
       - node
       - fd
 
   tasks:
     - name: Install developer tools on Ubuntu
+      become: yes
       apt:
         name: "{{ common_tools + ubuntu_tools }}"
         state: present
@@ -35,3 +34,4 @@
         name: "{{ common_tools + mac_tools }}"
         state: present
       when: ansible_facts['os_family'] == "Darwin"
+
