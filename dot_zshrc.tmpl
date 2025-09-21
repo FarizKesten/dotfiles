@@ -125,10 +125,30 @@ alias ls='eza'
 alias ls='eza'  # Will be installed via Ansible
 {{- end }}
 
-# Tmux
+# TMUX
 export PATH="$HOME/.tmuxifier/bin:$PATH"
 eval "$(tmuxifier init -)"
-alias dev='tmuxifier load-session dev'
+code() {
+  if [[ -z "$1" ]]; then
+    echo "Usage: dev <project-path>"
+    return 1
+  fi
+  
+  export TMUX_PROJECT_PATH="$1"
+  export TMUX_PROJECT_NAME="$(basename $1)"
+  tmuxifier load-session dev
+}
+
+# Add tab completion for directories
+_code() {
+  _arguments \
+    '1:project directory:_directories'
+}
+compdef _code code
+
+
+#chezmoi
+alias cz='chezmoi apply && source ~/.zshrc'
 
 # Modern replacements
 alias find='fd'
@@ -150,7 +170,7 @@ alias ....='cd ../../..'
 # === Environment Cleanup ===
 unset SUDO_UID SUDO_GID SUDO_USER
 
-# === Shell History Settings ===
+# === Shell Histor ===
 setopt HIST_VERIFY
 setopt EXTENDED_HISTORY
 setopt SHARE_HISTORY

@@ -1,17 +1,20 @@
 # Set a custom session root path. Default is `$HOME`.
 # Must be called before `initialize_session`.
-#session_root "~/Projects/dev"
+session_root="$TMUX_PROJECT_PATH"
+session_name="$TMUX_PROJECT_NAME"
 
-# Create session with specified name if it does not already exist. If no
-# argument is given, session name will be based on layout file name.
-if initialize_session "dev"; then
+if [[ -z "$session_root" ]]; then
+  echo "$session_root path is not set. Please provide a valid path."
+  exit 1
+fi
 
+if initialize_session "$session_name"; then
   # Create a new window inline within session layout definition.
-  new_window "misc"
-  split_v 25
+  new_window "editor"
+  split_v 20
   split_h 50
   select_pane 1
-  run_cmd "nvim ."
+  run_cmd "nvim $session_root"
 
   # Load a defined window layout.
   #load_window "example"
