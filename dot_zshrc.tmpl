@@ -162,9 +162,3 @@ export BROWSER='open'
 # Work machine specific settings
 # Add any work-specific configurations here
 
-# Switch to fish shell if available (your preference)
-{{- if eq .chezmoi.os "darwin" }}
-if command -v fish >/dev/null 2>&1; then
-  exec fish
-fi
-{{- end }}
