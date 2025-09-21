@@ -16,7 +16,7 @@ window-padding-x = 16
 window-padding-y = 16
 
 # Shell integration
-shell-integration = fish
+shell-integration = zsh
 
 # Reload config shortcut
 keybind = ctrl+shift+comma=reload_config
