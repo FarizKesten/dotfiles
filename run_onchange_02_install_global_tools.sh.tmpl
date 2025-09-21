@@ -6,5 +6,15 @@ set -e
 
 echo "🔧 Setting up global development tools..."
 
+# Or manually add tools:
+devbox global add ripgrep fzf git tmux curl wget jq zsh fd neovim nodejs lazygit tree-sitter
+
+# Add shell integration
+echo 'eval "$(devbox global shellenv --init-hook)"' >> ~/.zshrc
+source ~/.zshrc
+
+# Install npm tools
+npm install -g @bitwarden/cli tree-sitter-cli
+
 # Execute the playbook
-ansible-playbook developer-tools.yml -i localhost, --connection=local
+# ansible-playbook developer-tools.yml -i localhost, --connection=local
