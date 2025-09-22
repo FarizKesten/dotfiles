@@ -1,5 +1,5 @@
-#!/bin/bash  
-# run_onchange_setup_tmux.sh.tmpl
+#!/bin/bash
+# run_onchange_03_setup_tmux.sh.tmpl
 
 set -e
 
@@ -7,11 +7,12 @@ echo "⚡ Setting up Tmux..."
 
 # Install Tmux plugins
 if [ ! -d ~/.tmuxifier ]; then
-    echo "Installing Tmuxifier..."
-    git clone https://github.com/jimeh/tmuxifier.git ~/.tmuxifier
-    echo "Tmuxifier installed! ✅"
+  echo "Installing Tmuxifier..."
+  rm -rf ~/.tmuxifier
+  git clone https://github.com/jimeh/tmuxifier.git ~/.tmuxifier
+  echo "Tmuxifier installed! ✅"
 else
-    echo "Tmuxifier already configured ✅"
+  echo "Tmuxifier already configured ✅"
 fi
 
 echo "Tmux setup complete!"

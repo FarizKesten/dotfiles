@@ -6,15 +6,47 @@ set -e
 
 echo "🔧 Setting up global development tools..."
 
+#------------------------------mise
+mise use -g fd
+mise use -g eza
+mise use -g fzf
+mise use -g jq
+mise use -g lazygit
+mise use -g neovim
+mise use -g nodejs
+mise use -g ripgrep
+mise use -g tree-sitter
+mise plugins install bitwarden
+mise use -g bitwarden
+mise use -g tmux
+
+# workaround for eza
+if ! command -v eza >/dev/null 2>&1; then
+  {{- if eq .chezmoi.os "darwin" }}
+  brew install eza
+  {{- end }}
+
+  {{- if eq .chezmoi.os "linux" }}
+  # Download pre-built binary
+  wget https://github.com/eza-community/eza/releases/latest/download/eza_x86_64-unknown-linux-gnu.tar.gz
+  tar -xzf eza_x86_64-unknown-linux-gnu.tar.gz
+  sudo mv eza /usr/local/bin/
+  rm -rf eza_x86_64-unknown-linux-gnu.tar.gz
+  {{- end }}
+
+  sudo apt install xclip
+fi
+
+#------------------------------testing devbox
 # Or manually add tools:
-devbox global add ripgrep fzf git tmux curl wget jq zsh fd neovim nodejs lazygit tree-sitter
+# devbox global add ripgrep fzf git tmux curl get jq zsh fd neovim nodejs lazygit tree-sitter
 
-# Add shell integration
-echo eval "$(devbox global shellenv)" >> ~/.zshrc && source ~/.zshrc
-refresh-global
-nix profile add nixpkgs#eza
-# Install npm tools
-npm install -g @bitwarden/cli tree-sitter-cli
+# Add shell integration echo eval "$(devbox global shellenv)" >> ~/.zshrc && source ~/.zshrc
+# refresh-global
+# nix profile add nixpkgs#eza
+# # Install npm tools
+# npm install -g @bitwarden/cli tree-sitter-cli
 
+#------------------------------testing ansible
 # Execute the playbook
 # ansible-playbook developer-tools.yml -i localhost, --connection=local

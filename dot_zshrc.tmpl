@@ -37,16 +37,16 @@ export VI_MODE_SET_CURSOR=true
 source $ZSH/oh-my-zsh.sh
 
 # === Development Environment Setup ===
-# DevBox global environment
-eval "$(devbox global shellenv --init-hook)"
-
-# DevBox completions
-eval "$(devbox completion zsh)"
-
-# DevBox aliases for convenience
-alias dglobal="devbox global"
-alias dshell="devbox shell"
-alias drun="devbox run"
+# # DevBox global environment
+# eval "$(devbox global shellenv --init-hook)"
+#
+# # DevBox completions
+# eval "$(devbox completion zsh)"
+#
+# # DevBox aliases for convenience
+# alias dglobal="devbox global"
+# alias dshell="devbox shell"
+# alias drun="devbox run"
 
 {{- if eq .chezmoi.os "darwin" }}
 # macOS-specific paths and tools
@@ -99,6 +99,7 @@ export NVM_DIR="$HOME/.nvm"
 
 # TMUX
 export PATH="$HOME/.tmuxifier/bin:$PATH"
+
 eval "$(tmuxifier init -)"
 code() {
   if [[ -z "$1" ]]; then

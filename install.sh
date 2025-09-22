@@ -2,19 +2,30 @@
 set -e
 echo "🚀 Starting automated setup..."
 
-# Install sudo if missing (for Docker containers)
-if ! command -v sudo >/dev/null 2>&1; then
+if [[ $(uname) == "Linux" ]]; then
+  # Install sudo if missing (for Docker containers)
+  if ! command -v sudo >/dev/null 2>&1; then
     echo "Installing sudo for container environment..."
     if command -v apt-get >/dev/null 2>&1; then
-        apt-get update && apt-get install -y sudo
+      apt-get update && apt-get install -y sudo
     elif command -v apk >/dev/null 2>&1; then
-        apk add --no-cache sudo
+      apk add --no-cache sudo
     fi
+  fi
+  sudo apt update
+  sudo apt install -y build-essential libevent-dev libncurses5-dev libncursesw5-dev pkg-config bison byacc
 fi
 
 # Install chezmoi if not present
 if ! command -v chezmoi >/dev/null 2>&1; then
   sh -c "$(curl -fsLS chezmoi.io/get)"
+fi
+
+#Install mise if not present
+if ! command -v mise >/dev/null 2>&1; then
+  curl https://mise.run | sh
+  echo 'eval "$(mise activate zsh)"' >>~/.zshrc
+  source ~/.zshrc
 fi
 
 #Install devbox if not present
