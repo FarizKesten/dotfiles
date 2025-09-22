@@ -48,5 +48,5 @@ if ! command -v ansible &>/dev/null; then
 fi
 
 # Initialize chezmoi with your dotfiles
-chezmoi init --apply https://github.com/FarizKesten/dotfiles.git
+$HOME/bin/chezmoi init --apply https://github.com/FarizKesten/dotfiles.git
 echo "🎉 Setup complete!"
