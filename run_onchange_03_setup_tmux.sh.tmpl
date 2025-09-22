@@ -11,6 +11,10 @@ if [ ! -d ~/.tmuxifier ]; then
   rm -rf ~/.tmuxifier
   git clone https://github.com/jimeh/tmuxifier.git ~/.tmuxifier
   echo "Tmuxifier installed! ✅"
+
+  echo "Installing tpm (Tmux Plugin Manager)..."
+  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+  echo "tpm installed!"
 else
   echo "Tmuxifier already configured ✅"
 fi

@@ -16,14 +16,15 @@ mise use -g neovim
 mise use -g nodejs
 mise use -g ripgrep
 mise use -g tree-sitter
-mise plugins install bitwarden
-mise use -g bitwarden
 mise use -g tmux
+mise use -g gopass
+mise use -g bat
 
 # workaround for eza
 if ! command -v eza >/dev/null 2>&1; then
   {{- if eq .chezmoi.os "darwin" }}
   brew install eza
+  brew install bat
   {{- end }}
 
   {{- if eq .chezmoi.os "linux" }}
@@ -32,9 +33,10 @@ if ! command -v eza >/dev/null 2>&1; then
   tar -xzf eza_x86_64-unknown-linux-gnu.tar.gz
   sudo mv eza /usr/local/bin/
   rm -rf eza_x86_64-unknown-linux-gnu.tar.gz
-  {{- end }}
 
   sudo apt install xclip
+  sudo apt install bat
+  {{- end }}
 fi
 
 #------------------------------testing devbox

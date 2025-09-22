@@ -34,7 +34,7 @@ plugins=(
 export VI_MODE_SET_CURSOR=true
 
 # Load Oh My Zsh
-source $ZSH/oh-my-zsh.sh
+# source $ZSH/oh-my-zsh.sh
 
 # === Development Environment Setup ===
 # # DevBox global environment
@@ -150,11 +150,12 @@ fvim() {
 
 # Your existing aliases (with cross-platform compatibility)
 alias vim='nvim'
-alias cat='bat'
 {{- if eq .chezmoi.os "darwin" }}
 alias ls='eza'
+alias cat='bat'
 {{- else }}
 alias ls='eza'  # Will be installed via Ansible
+alias cat='batcat'
 {{- end }}
 
 #chezmoi
