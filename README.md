@@ -11,7 +11,7 @@ curl -fsSL https://raw.githubusercontent.com/FarizKesten/dotfiles/main/install.s
 ```
 
 That's it! This will automatically:
-- ✅ Install chezmoi and Ansible
+- ✅ Install chezmoi, devbox and Ansible
 - ✅ Configure your development tools
 - ✅ Set up LazyVim with custom configuration  
 - ✅ Install tmux with custom layouts via tmuxifier
