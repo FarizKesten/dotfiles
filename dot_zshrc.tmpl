@@ -34,7 +34,7 @@ plugins=(
 export VI_MODE_SET_CURSOR=true
 
 # Load Oh My Zsh
-# source $ZSH/oh-my-zsh.sh
+source $ZSH/oh-my-zsh.sh
 
 # === Development Environment Setup ===
 # # DevBox global environment
@@ -129,8 +129,9 @@ fi
 
 # Chezmoi completions
 if command -v chezmoi >/dev/null 2>&1; then
-  eval "$(chezmoi completion zsh)"
+  alias chezmoi=$HOME/bin/chezmoi
 fi
+eval "$(chezmoi completion zsh)"
 
 # === Custom Functions ===
 
