@@ -326,3 +326,8 @@
 1758568354.665322 peer 0x55dbddf93170 message 207
 1758568354.665346 sending message 208 to peer 0x55dbddf93170 (0 bytes)
 1758568358.018632 peer 0x55dbddf93170 message 214
+1758591003.019812 client_signal: Terminated
+1758591003.019825 sending message 205 to peer 0x55dbddf93170 (0 bytes)
+1758591003.019828 client_signal: Continued
+1758591003.019830 sending message 216 to peer 0x55dbddf93170 (0 bytes)
+1758591003.019832 client loop exit
