@@ -1,10 +1,11 @@
-# mise settings
-echo 'eval "$(~/.local/bin/mise activate zsh)"' >> ~/.zshrc
-
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 # Enable Powerlevel10k instant prompt (must be near top)
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
+
+# mise settings
+echo 'eval "$(~/.local/bin/mise activate zsh)"' >> ~/.zshrc
 
 # Initialize zsh completions first (fixes compdef errors)
 autoload -U compinit
