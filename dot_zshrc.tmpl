@@ -196,7 +196,18 @@ setopt HIST_IGNORE_SPACE
 export EDITOR='nvim'
 export BROWSER='open'
 
+# mise settings
+echo 'eval "$(~/.local/bin/mise activate zsh)"' >> ~/.zshrc
+
+export http_proxy="http://localhost:3128"
+export HTTP_PROXY="http://localhost:3128"
+export https_proxy="http://localhost:3128"
+export HTTPS_PROXY="http://localhost:3128"
+export ftp_proxy="http://localhost:3128"
+export FTP_PROXY="http://localhost:3128"
+export all_proxy="http://localhost:3128"
+export ALL_PROXY="http://localhost:3128"
+export no_proxy='localhost, 127.0.0.*, 192.168.*, .local, 172.*, *.bosch.*'
 
 # Work machine specific settings
 # Add any work-specific configurations here
-
