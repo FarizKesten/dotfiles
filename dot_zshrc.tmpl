@@ -124,6 +124,8 @@ if command -v chezmoi >/dev/null 2>&1; then
 fi
 eval "$(chezmoi completion zsh)"
 
+export CHEZMOI_SECRET_BACKEND=gopass
+
 # === Custom Functions ===
 
 # Fuzzy directory navigation (your existing function)
