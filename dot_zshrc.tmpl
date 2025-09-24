@@ -1,3 +1,4 @@
+PROMPT='%F{green}%n@%m%f %F{blue}%~%f %# '
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
 # Enable Powerlevel10k instant prompt (must be near top)
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
@@ -5,7 +6,11 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # mise settings
-echo 'eval "$(~/.local/bin/mise activate zsh)"' >> ~/.zshrc
+# Only activate mise once
+if [[ -z "$MISE_ACTIVATED" ]]; then
+    eval "$(~/.local/bin/mise activate zsh)"
+    export MISE_ACTIVATED=1
+fi
 
 # Initialize zsh completions first (fixes compdef errors)
 autoload -U compinit
@@ -192,9 +197,9 @@ export EDITOR='nvim'
 export BROWSER='open'
 
 # mise settings
-echo 'eval "$(~/.local/bin/mise activate zsh)"' >> ~/.zshrc
-
-{{- if .chezmoi.data.personal }}
+# echo 'eval "$(~/.local/bin/mise activate zsh)"' >> ~/.zshrc
+WORK_STATUS=$(chezmoi cat-config | grep "^work:" | awk '{print $2}')
+if [ "$WORK_STATUS" = "true" ]; then
 export http_proxy="http://localhost:3128"
 export HTTP_PROXY="http://localhost:3128"
 export https_proxy="http://localhost:3128"
@@ -204,7 +209,7 @@ export FTP_PROXY="http://localhost:3128"
 export all_proxy="http://localhost:3128"
 export ALL_PROXY="http://localhost:3128"
 export no_proxy='localhost, 127.0.0.*, 192.168.*, .local, 172.*, *.bosch.*'
-{{- end }}
+fi
 
 
 # Work machine specific settings

@@ -1,0 +1,14 @@
+{{ $name := promptStringOnce . "name" "What is your name" -}}
+{{ $email := promptStringOnce . "email" "What is your email address" -}}
+{{ $work := promptBoolOnce . "work" "Is this your work pc" -}}
+{{ $personal := promptBoolOnce . "personal" "Is this your personal pc" -}}
+
+data:
+name: {{ $name | quote }}
+email: {{ $email | quote }}
+work: {{ $work }}
+personal: {{ $personal }}
+
+git:
+autoCommit : true
+autoPush : true
