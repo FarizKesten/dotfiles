@@ -1,15 +1,16 @@
 PROMPT='%F{green}%n@%m%f %F{blue}%~%f %# '
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=off
 # Enable Powerlevel10k instant prompt (must be near top)
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+USER_NAME=${USER:-$(whoami)}
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-$USER_NAME.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-$USER_NAME.zsh"
 fi
 
 # mise settings
 # Only activate mise once
 if [[ -z "$MISE_ACTIVATED" ]]; then
-    eval "$(~/.local/bin/mise activate zsh)"
-    export MISE_ACTIVATED=1
+  eval "$(~/.local/bin/mise activate zsh)"
+  export MISE_ACTIVATED=1
 fi
 
 # Initialize zsh completions first (fixes compdef errors)
@@ -72,7 +73,7 @@ export PATH="$HOME/.local/bin:$PATH"
 
 # Conda setup (Linux) - adjust path as needed
 if [ -f "$HOME/anaconda3/bin/conda" ]; then
-  __conda_setup="$('$HOME/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+  __conda_setup="$('$HOME/anaconda3/bin/conda' 'shell.zsh' 'hook' 2>/dev/null)"
   if [ $? -eq 0 ]; then
     eval "$__conda_setup"
   else
@@ -100,7 +101,7 @@ code() {
     echo "Usage: dev <project-path>"
     return 1
   fi
-  
+
   export TMUX_PROJECT_PATH="$1"
   export TMUX_PROJECT_NAME="$(basename $1)"
   tmuxifier load-session dev
@@ -135,8 +136,8 @@ export CHEZMOI_SECRET_BACKEND=gopass
 
 # Fuzzy directory navigation (your existing function)
 fcd() {
-  local dir 
-  dir=$(find ${1:-.} -type d -not -path '*/\.*' 2> /dev/null | fzf +m) && cd "$dir"
+  local dir
+  dir=$(find ${1:-.} -type d -not -path '*/\.*' 2>/dev/null | fzf +m) && cd "$dir"
 }
 
 # Enhanced fuzzy file search
@@ -153,7 +154,7 @@ alias vim='nvim'
 alias ls='eza'
 alias cat='bat'
 {{- else }}
-alias ls='eza'  # Will be installed via Ansible
+alias ls='eza' # Will be installed via Ansible
 alias cat='batcat'
 {{- end }}
 
@@ -200,23 +201,29 @@ export BROWSER='open'
 # mise settings
 # echo 'eval "$(~/.local/bin/mise activate zsh)"' >> ~/.zshrc
 WORK_STATUS=$(chezmoi cat-config | grep "^work:" | awk '{print $2}')
-if [ "$WORK_STATUS" = "true" ]; then
-export http_proxy="http://localhost:3128"
-export HTTP_PROXY="http://localhost:3128"
-export https_proxy="http://localhost:3128"
-export HTTPS_PROXY="http://localhost:3128"
-export ftp_proxy="http://localhost:3128"
-export FTP_PROXY="http://localhost:3128"
-export all_proxy="http://localhost:3128"
-export ALL_PROXY="http://localhost:3128"
-export no_proxy='localhost, 127.0.0.*, 192.168.*, .local, 172.*, *.bosch.*'
-fi
+WSL_STATUS=$(chezmoi cat-config | grep "^wsl:" | awk '{print $2}')
 
+if [ "$WORK_STATUS" = "true" ]; then
+  if [ "$WSL_STATUS" = "true" ]; then
+    PROXY="http://wsl-proxy:3129"
+  else
+    PROXY="http://localhost:3128"
+  fi
+
+  export http_proxy="$PROXY"
+  export HTTP_PROXY="$PROXY"
+  export https_proxy="$PROXY"
+  export HTTPS_PROXY="$PROXY"
+  export ftp_proxy="$PROXY"
+  export FTP_PROXY="$PROXY"
+  export all_proxy="$PROXY"
+  export ALL_PROXY="$PROXY"
+  export no_proxy='localhost,127.0.0.*,192.168.*,172.*,*.local,*.bosch.*'
+fi
 # remove cursor moving around during lagging
 unsetopt PROMPT_SP
-unsetopt zle_bracketed_paste
+# unsetopt zle_bracketed_paste
 export TERM=xterm-256color
-
 
 # Work machine specific settings
 # Add any work-specific configurations here

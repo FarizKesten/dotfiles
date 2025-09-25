@@ -1,12 +1,14 @@
 {{ $name := promptStringOnce . "name" "What is your name" -}}
 {{ $email := promptStringOnce . "email" "What is your email address" -}}
 {{ $work := promptBoolOnce . "work" "Is this your work pc" -}}
+{{ $wsl := promptBoolOnce . "wsl" "Is this in wsl?" -}}
 {{ $personal := promptBoolOnce . "personal" "Is this your personal pc" -}}
 
 data:
 name: {{ $name | quote }}
 email: {{ $email | quote }}
 work: {{ $work }}
+wsl: {{ $wsl }}
 personal: {{ $personal }}
 
 git:
