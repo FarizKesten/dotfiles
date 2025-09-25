@@ -160,7 +160,8 @@ alias cat='batcat'
 alias lg=lazygit
 
 #chezmoi
-alias cz='chezmoi apply && source ~/.zshrc'
+alias cz='chezmoi'
+alias cza='chezmoi apply && source ~/.zshrc'
 
 # Modern replacements
 alias find='fd'
@@ -210,6 +211,11 @@ export all_proxy="http://localhost:3128"
 export ALL_PROXY="http://localhost:3128"
 export no_proxy='localhost, 127.0.0.*, 192.168.*, .local, 172.*, *.bosch.*'
 fi
+
+# remove cursor moving around during lagging
+unsetopt PROMPT_SP
+unsetopt zle_bracketed_paste
+export TERM=xterm-256color
 
 
 # Work machine specific settings
