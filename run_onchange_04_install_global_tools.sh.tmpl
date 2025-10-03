@@ -9,6 +9,7 @@ echo "🔧 Setting up global development tools..."
 #------------------------------mise
 mise use -g fd
 mise use -g eza
+mise use -g zoxide
 mise use -g fzf
 mise use -g jq
 mise use -g lazygit
@@ -42,14 +43,27 @@ brew install bat
 brew install luarocks
 brew install imagemagick pkg-config
 pip install pynvim jupyter_client ipykernel debugpy
-{{- end }}
-{{- if eq .chezmoi.os "linux" }}
 
+# conda
+brew install --cask miniconda
+
+#devpod
+curl -L -o devpod "https://github.com/loft-sh/devpod/releases/latest/download/devpod-darwin-arm64" && sudo install -c -m 0755 devpod /usr/local/bin && rm -f devpod
+{{- end }}
+
+{{- if eq .chezmoi.os "linux" }}
 sudo apt install -y xclip
 sudo apt install -y bat
 sudo apt update && sudo apt install libmagickwand-dev pkgconf
 pip install pynvim jupyter_client ipykernel debugpy
 sudo apt install -y luarocks
+
+# conda
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
+bash miniconda.sh
+
+#devpod
+curl -L -o devpod "https://github.com/loft-sh/devpod/releases/latest/download/devpod-linux-amd64" && sudo install -c -m 0755 devpod /usr/local/bin && rm -f devpod
 {{- end }}
 
 pip install jupyter-client jupytext cairosvg pnglatex plotly kaleido pyperclip nbformat
