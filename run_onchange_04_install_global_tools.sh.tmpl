@@ -59,8 +59,14 @@ pip install pynvim jupyter_client ipykernel debugpy
 sudo apt install -y luarocks
 
 # conda
-wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
-bash miniconda.sh
+# only install if not already installed
+if command -v conda >/dev/null 2>&1; then
+  echo "Conda is already installed, skipping Miniconda installation."
+  exit 0
+else
+  wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh
+  bash miniconda.sh
+fi
 
 #devpod
 curl -L -o devpod "https://github.com/loft-sh/devpod/releases/latest/download/devpod-linux-amd64" && sudo install -c -m 0755 devpod /usr/local/bin && rm -f devpod
