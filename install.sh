@@ -57,7 +57,8 @@ if ! command -v ansible &>/dev/null; then
     exit 1
   fi
 fi
-
+echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc 
+echo 'export PATH="$PWD/bin:$PATH"' >> ~/.zshrc 
 # Initialize chezmoi with your dotfiles
-$HOME/bin/chezmoi init --apply https://github.com/FarizKesten/dotfiles.git
+chezmoi init --apply https://github.com/FarizKesten/dotfiles.git
 echo "🎉 Setup complete!"
