@@ -61,6 +61,7 @@ fi
 fi
 echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc 
 echo 'export PATH="$PWD/bin:$PATH"' >> ~/.zshrc 
+source ~/.zshrc
 # Initialize chezmoi with your dotfiles
 chezmoi init --apply https://github.com/FarizKesten/dotfiles.git
 echo "🎉 Setup complete!"
