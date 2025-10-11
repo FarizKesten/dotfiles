@@ -19,11 +19,14 @@ fi
 # Install chezmoi if not present
 if ! command -v chezmoi >/dev/null 2>&1; then
   sh -c "$(curl -fsLS chezmoi.io/get)"
+  echo 'export PATH="$PWD/bin:$PATH"' >> ~/.zshrc 
+  source ~/.zshrc
 fi
 
 #Install mise if not present
 if ! command -v mise >/dev/null 2>&1; then
   curl https://mise.run | sh
+  echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc 
   echo 'eval "$(mise activate zsh)"' >>~/.zshrc
   source ~/.zshrc
 fi
@@ -59,9 +62,7 @@ if ! command -v ansible &>/dev/null; then
   fi
 fi
 fi
-echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc 
-echo 'export PATH="$PWD/bin:$PATH"' >> ~/.zshrc 
-source ~/.zshrc
+
 # Initialize chezmoi with your dotfiles
 chezmoi init --apply https://github.com/FarizKesten/dotfiles.git
 echo "🎉 Setup complete!"
