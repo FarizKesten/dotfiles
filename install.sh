@@ -29,6 +29,7 @@ if ! command -v mise >/dev/null 2>&1; then
 fi
 
 #Install devbox if not present
+if false then
 if ! command -v devbox >/dev/null 2>&1; then
   curl -fsSL https://get.jetify.com/devbox | bash
 fi
@@ -56,6 +57,7 @@ if ! command -v ansible &>/dev/null; then
     echo "Unsupported OS: $OSTYPE"
     exit 1
   fi
+fi
 fi
 echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc 
 echo 'export PATH="$PWD/bin:$PATH"' >> ~/.zshrc 
