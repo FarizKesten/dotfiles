@@ -39,6 +39,7 @@ if [[ -z "$MISE_ACTIVATED" ]]; then
   export MISE_ACTIVATED=1
 fi
 export PATH="$HOME/.local/share/mise/shims:$PATH"
+export PATH="$HOME/.tmuxifier/bin:$PATH"
 
 # Initialize zsh completions first (fixes compdef errors)
 autoload -U compinit

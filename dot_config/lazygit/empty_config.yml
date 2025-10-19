@@ -1,1 +1,4 @@
 editor: nvim {{filename}}
+gui:
+  switchTabsWithPanelJumpKeys: true
+

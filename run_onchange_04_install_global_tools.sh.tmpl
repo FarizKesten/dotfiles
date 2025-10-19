@@ -6,6 +6,9 @@ set -e
 
 echo "🔧 Setting up global development tools..."
 
+# alias python=python3
+# alias pip=pip3
+
 #------------------------------mise
 mise use -g fd
 mise use -g eza
@@ -39,13 +42,13 @@ if ! command -v eza >/dev/null 2>&1; then
 fi
 
 {{- if eq .chezmoi.os "darwin" }}
+# conda
+brew install --cask miniconda
+
 brew install bat
 brew install luarocks
 brew install imagemagick pkg-config
 pip install pynvim jupyter_client ipykernel debugpy
-
-# conda
-brew install --cask miniconda
 
 #devpod
 curl -L -o devpod "https://github.com/loft-sh/devpod/releases/latest/download/devpod-darwin-arm64" && sudo install -c -m 0755 devpod /usr/local/bin && rm -f devpod
@@ -55,7 +58,7 @@ curl -L -o devpod "https://github.com/loft-sh/devpod/releases/latest/download/de
 sudo apt install -y xclip
 sudo apt install -y bat
 sudo apt update && sudo apt install libmagickwand-dev pkgconf
-pip install pynvim jupyter_client ipykernel debugpy
+
 sudo apt install -y luarocks
 
 # conda
