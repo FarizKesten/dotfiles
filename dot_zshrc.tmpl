@@ -4,6 +4,13 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-$USER_NAME.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-$USER_NAME.zsh"
 fi
 
+# ----- Python Forward Compatibility -----
+{{- if or (eq .chezmoi.os "linux") (eq .chezmoi.os "darwin") }}
+# Map Python and Pip commands to Python3
+alias python='python3'
+alias pip='pip3'
+{{- end }}
+
 #Conda
 if [ -d "$HOME/miniconda3" ]; then
   # Linux or bash-script install macOS
@@ -15,6 +22,7 @@ elif [ -d "/usr/local/Caskroom/miniconda/latest/miniconda3" ]; then
   # macOS Homebrew Intel
   eval "$(/usr/local/Caskroom/miniconda/latest/miniconda3/bin/conda shell.zsh hook)"
 fi
+
 # Auto-activate conda environment based on .conda-env file
 autoload -U add-zsh-hook
 
@@ -75,16 +83,6 @@ export VI_MODE_SET_CURSOR=true
 source $ZSH/oh-my-zsh.sh
 
 # === Development Environment Setup ===
-# # DevBox global environment
-# eval "$(devbox global shellenv --init-hook)"
-#
-# # DevBox completions
-# eval "$(devbox completion zsh)"
-#
-# # DevBox aliases for convenience
-# alias dglobal="devbox global"
-# alias dshell="devbox shell"
-# alias drun="devbox run"
 if [ -d "$HOME/miniconda3" ]; then
   # Linux or bash-script install macOS
   eval "$($HOME/miniconda3/bin/conda shell.zsh hook)"
@@ -228,8 +226,6 @@ eval "$(zoxide init --cmd cd zsh)"
 # brew (macOS)
 {{- if eq .chezmoi.os "darwin" }}
 eval "$(/opt/homebrew/bin/brew shellenv)"
-{{- else if eq .chezmoi.os "linux" }}
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 {{end}}
 
 # === Environment Cleanup ===

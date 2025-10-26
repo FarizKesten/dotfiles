@@ -1,0 +1,53 @@
+tools:
+  mise_global:
+    - fd
+    - eza
+    - zoxide
+    - fzf
+    - jq
+    - lazygit
+    - neovim
+    - nodejs
+    - ripgrep
+    - tree-sitter
+    - tmux
+    - gopass
+    - bat
+    - aqua:gopasspw/gopass
+
+  pip:
+    - pynvim
+    - jupyter_client
+    - ipykernel
+    - debugpy
+    - matplotlib
+    - seaborn
+    - plotly
+    - pandas
+    - numpy
+    - scipy
+    - cairosvg
+    - pnglatex
+    - kaleido
+    - pyperclip
+    - nbformat
+    - pillow
+
+  linux:
+    apt:
+      - xclip
+      - bat
+      - luarocks
+      - libmagickwand-dev
+      - pkgconf
+      - gh
+  darwin:
+    brews:
+      - bat
+      - luarocks
+      - imagemagick
+      - pkg-config
+      - gh
+    casks:
+      - miniconda
+

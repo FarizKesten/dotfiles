@@ -1,0 +1,48 @@
+#!/bin/bash
+set -euo pipefail
+
+echo "🚀 Installing development tools with ChezMoi + Mise"
+
+# ---------------- Mise tools ----------------
+if command -v mise >/dev/null 2>&1; then
+  echo "🔧 Installing global tools via mise..."
+  mise use -g {{ range .tools.mise_global }}{{ . }} {{ end }}
+else
+  echo "⚠️ Mise not found in PATH. Please install mise first: https://mise.jdx.dev"
+fi
+
+# ---------------- OS detection ----------------
+{{ if eq .chezmoi.os "darwin" -}}
+echo "🍎 macOS detected: installing via Homebrew"
+brew install {{ range .tools.darwin.brews }}{{ . }} {{ end }}
+brew install --cask {{ range .tools.darwin.casks }}{{ . }} {{ end }}
+curl -L -o devpod "https://github.com/loft-sh/devpod/releases/latest/download/devpod-darwin-arm64"
+sudo install -c -m 0755 devpod /usr/local/bin && rm -f devpod
+{{ else if eq .chezmoi.os "linux" -}}
+echo "🐧 Linux detected: installing via apt"
+sudo apt update
+sudo apt install -y {{ range .tools.linux.apt }}{{ . }} {{ end }}
+curl -L -o devpod "https://github.com/loft-sh/devpod/releases/latest/download/devpod-linux-amd64"
+sudo install -c -m 0755 devpod /usr/local/bin && rm -f devpod
+{{ end -}}
+
+# ---------------- Python & Node setup ----------------
+if command -v pip >/dev/null 2>&1; then
+  echo "🐍 Installing Python packages..."
+  pip install {{ range .tools.pip }}{{ . }} {{ end }}
+else
+  echo "⚠️ Pip not found. Install Python3 first via mise or system package manager."
+fi
+
+if command -v npm >/dev/null 2>&1; then
+  echo "📦 Installing neovim npm package..."
+  npm install -g neovim
+fi
+
+# ---------------- Jupyter setup ----------------
+if command -v python >/dev/null 2>&1; then
+  echo "🧠 Registering Jupyter kernel..."
+  python -m ipykernel install --user --name jupyter-nvim --display-name "Python (Neovim)"
+fi
+
+echo "✅ Setup complete."

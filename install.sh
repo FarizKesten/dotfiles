@@ -70,7 +70,7 @@ fi
 if ! command -v chezmoi >/dev/null 2>&1; then
   echo "Installing chezmoi..."
   sh -c "$(curl -fsLS chezmoi.io/get)"
-  echo 'export PATH="$PWD/bin:$PATH"' >> ~/.zshrc 
+  echo 'export PATH="$PWD/bin:$PATH"' >>~/.zshrc
   source ~/.zshrc || true
 fi
 
@@ -80,47 +80,10 @@ fi
 if ! command -v mise >/dev/null 2>&1; then
   echo "Installing mise..."
   curl https://mise.run | sh
-  echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc 
-  echo 'eval "$(mise activate zsh)"' >> ~/.zshrc
+  echo 'export PATH="$HOME/.local/bin:$PATH"' >>~/.zshrc
+  echo 'eval "$(mise activate zsh)"' >>~/.zshrc
   source ~/.zshrc || true
 fi
-
-# ----------------------------------------------------------
-# Install devbox if not present
-# ----------------------------------------------------------
-# if ! command -v devbox >/dev/null 2>&1; then
-#   echo "Installing devbox..."
-#   curl -fsSL https://get.jetify.com/devbox | bash
-# fi
-
-# # ----------------------------------------------------------
-# # Install Ansible if not present
-# # ----------------------------------------------------------
-# if ! command -v ansible >/dev/null 2>&1; then
-#   echo "Installing Ansible..."
-
-#   if [[ "$OSTYPE" == "darwin"* ]]; then
-#     if ! command -v brew >/dev/null 2>&1; then
-#       echo "Installing Homebrew..."
-#       /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-#       eval "$(/opt/homebrew/bin/brew shellenv || /usr/local/bin/brew shellenv)"
-#     fi
-#     brew install ansible
-
-#   elif [[ -f /etc/os-release ]]; then
-#     . /etc/os-release
-#     if [[ "$ID" == "ubuntu" || "$ID_LIKE" == *"debian"* ]]; then
-#       sudo apt update
-#       sudo apt install -y ansible
-#     else
-#       echo "⚠️ Unsupported Linux distro: $ID"
-#       exit 1
-#     fi
-#   else
-#     echo "⚠️ Unsupported OS: $OSTYPE"
-#     exit 1
-#   fi
-# fi
 
 # ----------------------------------------------------------
 # Initialize chezmoi with your dotfiles
